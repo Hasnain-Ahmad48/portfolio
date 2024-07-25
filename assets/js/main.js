@@ -38,7 +38,34 @@ const shadowHeader = () =>{
 window.addEventListener('scroll', shadowHeader)
 
 /*=============== EMAIL JS ===============*/
+const contactForm =document.getElementById('contact-form')
+contactMessage = document.getElementById('contact-message')
 
+
+const sentEmail=(e)=>{
+e.preventDefault()
+
+// serviceID - templateID - #form - publicKey
+emailjs.sendForm('service_kqfoodj','template_x3z1erp','#contact-form','dxeGyiEiLoVl_efCo')
+.then(()=>{
+
+    // Show sent message
+    contactMessage.textContent = ' Message sent successfully ✅'
+
+    // Remove message after five seconds
+    setTimeout(()=>{
+        contactMessage.textContent = ''
+    },5000)
+
+    contactForm.reset()
+}, ()=>{
+     // Show error message
+     contactMessage.textContent='Message not sent (service error) ❌'
+     
+})
+}
+
+contactForm.addEventListener('submit',sentEmail)
 
 /*=============== SHOW SCROLL UP ===============*/ 
 
